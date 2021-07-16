@@ -19,6 +19,7 @@ import pandas as pd
 from functools import reduce
 import re
 import tabulate
+from helpers import get_fevectarr, get_cevectarr
 
 def predict_labels(t, cl_model, ce_model, fe_model, senc, mode='ce+f', device='cpu'):
     if 'ce' in mode: ce_dim = ce_model.encdim*2
