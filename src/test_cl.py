@@ -14,7 +14,7 @@ from src.helpers import get_fevectarr, get_cevectarr
 
 
 def predict_labels(t, cl_model, ce_model, fe_model, senc, mode='ce+f', device='cpu'):
-    if 'ce' in mode: ce_dim = ce_model.encdim*2
+    if 'ce' in mode: ce_dim = ce_model.encdim * 2
     if 'f' in mode: fenc_dim = fe_model.encdim
     if mode == 'ce+f':
         runce = runfe = True
@@ -27,14 +27,14 @@ def predict_labels(t, cl_model, ce_model, fe_model, senc, mode='ce+f', device='c
     with torch.no_grad():
         tarr = np.array(t['table_array'])
         feature_array = np.array(t['feature_array'])
-        n,m = tarr.shape
-        
+        n, m = tarr.shape
+
         if runfe: fevtarr = get_fevectarr(feature_array, n, m, fe_model, device)
-        if runce: cevtarr = get_cevectarr(tarr, ce_model, senc, device, ce_model.num_context//4, senc_dim=4096)
+        if runce: cevtarr = get_cevectarr(tarr, ce_model, senc, device, ce_model.num_context // 4, senc_dim=4096)
         if runfe: fevtarr = torch.from_numpy(fevtarr).float()
         if runce: cevtarr = torch.from_numpy(cevtarr).float()
         if mode == 'ce+f':
-            features = torch.cat([cevtarr, fevtarr], dim=-1).to(device)  
+            features = torch.cat([cevtarr, fevtarr], dim=-1).to(device)
         elif mode == 'ce':
             features = cevtarr.to(device)
         elif mode == 'fe':
@@ -43,8 +43,36 @@ def predict_labels(t, cl_model, ce_model, fe_model, senc, mode='ce+f', device='c
         pred = cl_model(features).detach().cpu().numpy()
         pred_labels = np.argmax(pred, axis=-1)
         pred_probs = np.max(pred, axis=-1)
-        
+
     return pred_labels, pred_probs
+
+
+def generate_cell_embeddings(t, cl_model, ce_model, fe_model, senc, mode='ce+f', device='cpu'):
+    if mode == 'ce+f':
+        runce = runfe = True
+    elif mode == 'ce':
+        runfe = False
+        runce = True
+    elif mode == 'fe':
+        runfe = True
+        runce = False
+    with torch.no_grad():
+        tarr = np.array(t['table_array'])
+        feature_array = np.array(t['feature_array'])
+        n, m = tarr.shape
+
+        if runfe: fevtarr = get_fevectarr(feature_array, n, m, fe_model, device)
+        if runce: cevtarr = get_cevectarr(tarr, ce_model, senc, device, ce_model.num_context // 4, senc_dim=4096)
+        if runfe: fevtarr = torch.from_numpy(fevtarr).float()
+        if runce: cevtarr = torch.from_numpy(cevtarr).float()
+        if mode == 'ce+f':
+            features = torch.cat([cevtarr, fevtarr], dim=-1).to(device)
+        elif mode == 'ce':
+            features = cevtarr.to(device)
+        elif mode == 'fe':
+            features = fevtarr.to(device)
+
+    return features
 
 
 def predict(test_tables, cl_model, ce_model, fe_model, senc, label2ind, mode='ce+f', device='cpu'):
