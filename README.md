@@ -4,6 +4,7 @@
 ### python libraries
 The code is in Python 3, and tested in Conda environment. First create a fresh conda environment:
 
+conda create --name cell_emb -c conda-forge python=3.8 -y
 ```
 conda create -n cell_emb python=3.7
 ```
@@ -62,7 +63,7 @@ You can use `deploy/predict_labels.py` python script for generating predictions 
 ```
 usage: predict_labels.py [-h] [--file FILE] [--ce_model CE_MODEL]
                          [--fe_model FE_MODEL] [--cl_model CL_MODEL]
-                         [--w2v W2V] [--vocab_size VOCAB_SIZE]
+                         [--w2v W2V] [--vocab_size VOCAB_SIZE] -- A large number -> around 60K
                          [--infersent_model INFERSENT_MODEL]
                          [--infersent_source INFERSENT_SOURCE] [--out OUT]
 

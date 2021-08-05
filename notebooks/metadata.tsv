@@ -1,0 +1,69 @@
+id	role	type	value
+block_1	mainSubject	None	2018 Colombian presidential election
+block_8	qualifier	string	https://en.wikipedia.org/wiki/2018_Colombian_presidential_election
+block_10	qualifier	wikibaseitem	Second round[edit]
+block_3	qualifier	wikibaseitem	Gustavo Petro
+block_3	qualifier	wikibaseitem	Iván Duque Márquez
+block_6	qualifier	wikibaseitem	Centro Nacional de Consultoría
+block_4	qualifier	time	2018-05-31 00:00:00
+block_5	qualifier	quantity	1323
+block_2	dependentVar	quantity	0.35
+block_2	dependentVar	quantity	0.55
+block_7	qualifier	quantity	0.0305
+block_9	qualifier	wikibaseitem	Noticiero CM&
+block_6	qualifier	wikibaseitem	YanHaas
+block_4	qualifier	time	2018-06-05 00:00:00
+block_5	qualifier	quantity	1251
+block_2	dependentVar	quantity	0.34
+block_2	dependentVar	quantity	0.52
+block_7	qualifier	quantity	0.032
+block_9	qualifier	wikibaseitem	RCN, La FM, El Colombiano
+block_6	qualifier	wikibaseitem	Mosqueteros
+block_4	qualifier	time	2018-06-07 00:00:00
+block_5	qualifier	quantity	2147
+block_2	dependentVar	quantity	0.383
+block_2	dependentVar	quantity	0.502
+block_7	qualifier	quantity	0.0217
+block_9	qualifier	wikibaseitem	JPG, MSM, Yamil Cure Ruíz
+block_6	qualifier	wikibaseitem	Invamer
+block_4	qualifier	time	2018-06-07 00:00:00
+block_5	qualifier	quantity	1200
+block_2	dependentVar	quantity	0.373
+block_2	dependentVar	quantity	0.572
+block_7	qualifier	quantity	0.0283
+block_9	qualifier	wikibaseitem	Caracol TV, Blu Radio, Semana
+block_6	qualifier	wikibaseitem	Datexco
+block_4	qualifier	time	2018-06-08 00:00:00
+block_5	qualifier	quantity	1993
+block_2	dependentVar	quantity	0.402
+block_2	dependentVar	quantity	0.462
+block_7	qualifier	quantity	0.0231
+block_9	qualifier	wikibaseitem	W Radio
+block_6	qualifier	wikibaseitem	Cifras & Conceptos
+block_4	qualifier	time	2018-06-08 00:00:00
+block_5	qualifier	quantity	1983
+block_2	dependentVar	quantity	0.364
+block_2	dependentVar	quantity	0.453
+block_7	qualifier	quantity	0.048
+block_9	qualifier	wikibaseitem	Caracol Radio, RED+ Noticias
+block_6	qualifier	wikibaseitem	Centro Nacional de Consultoría[permanent dead link]
+block_4	qualifier	time	2018-06-09 00:00:00
+block_5	qualifier	quantity	1591
+block_2	dependentVar	quantity	0.38
+block_2	dependentVar	quantity	0.51
+block_7	qualifier	quantity	0.028
+block_9	qualifier	wikibaseitem	Noticiero CM&
+block_6	qualifier	wikibaseitem	Guarumo
+block_4	qualifier	time	2018-06-10 00:00:00
+block_5	qualifier	quantity	3955
+block_2	dependentVar	quantity	0.36
+block_2	dependentVar	quantity	0.525
+block_7	qualifier	quantity	0.021
+block_9	qualifier	wikibaseitem	El Tiempo, W Radio
+block_6	qualifier	wikibaseitem	CELAG /[citation needed]
+block_4	qualifier	time	2018-06-11 00:00:00
+block_5	qualifier	quantity	2063
+block_2	dependentVar	quantity	0.4
+block_2	dependentVar	quantity	0.455
+block_7	qualifier	quantity	0.022
+block_9	qualifier	wikibaseitem	nan

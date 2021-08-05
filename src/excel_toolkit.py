@@ -6,71 +6,73 @@ from nltk.tokenize import word_tokenize
 import itertools
 
 col_names = [x for x in string.ascii_lowercase]
-col_names += ['{}{}'.format(x,y) for x in string.ascii_lowercase for y in string.ascii_lowercase]
-col_names += ['{}{}{}'.format(x,y,z) for x in string.ascii_lowercase for y in string.ascii_lowercase for z in string.ascii_lowercase]
+col_names += ['{}{}'.format(x, y) for x in string.ascii_lowercase for y in string.ascii_lowercase]
+col_names += ['{}{}{}'.format(x, y, z) for x in string.ascii_lowercase for y in string.ascii_lowercase for z in string.ascii_lowercase]
+
 
 def get_excel_index_as_ints(r):
     col_names = [x for x in string.ascii_lowercase]
-    col_names += ['{}{}'.format(x,y) for x in string.ascii_lowercase for y in string.ascii_lowercase]
-    col_names += ['{}{}{}'.format(x,y,z) for x in string.ascii_lowercase for y in string.ascii_lowercase for z in string.ascii_lowercase]
-    
+    col_names += ['{}{}'.format(x, y) for x in string.ascii_lowercase for y in string.ascii_lowercase]
+    col_names += ['{}{}{}'.format(x, y, z) for x in string.ascii_lowercase for y in string.ascii_lowercase for z in string.ascii_lowercase]
+
     if ':' in r:
         rl, rr = r.split(':')
-        rl_r, rl_c = int(re.sub('[a-z]', '', rl))-1 , col_names.index(re.sub('[0-9]', '', rl))
-        rr_r, rr_c = int(re.sub('[a-z]', '', rr))-1 , col_names.index(re.sub('[0-9]', '', rr))
-        i,j = list(range(rl_r, rr_r+1)), list(range(rl_c, rr_c+1))
-        ij = list(itertools.product(i,j))
+        rl_r, rl_c = int(re.sub('[a-z]', '', rl)) - 1, col_names.index(re.sub('[0-9]', '', rl))
+        rr_r, rr_c = int(re.sub('[a-z]', '', rr)) - 1, col_names.index(re.sub('[0-9]', '', rr))
+        i, j = list(range(rl_r, rr_r + 1)), list(range(rl_c, rr_c + 1))
+        ij = list(itertools.product(i, j))
         i = [x[0] for x in ij]
         j = [x[1] for x in ij]
-    else:    
-        i = [int(re.sub('[a-z]', '', r))-1]
+    else:
+        i = [int(re.sub('[a-z]', '', r)) - 1]
         j = [col_names.index(re.sub('[0-9]', '', r))]
-        
-    return i,j
+
+    return i, j
+
 
 def get_excel_range_as_slice(tot_range, block_range):
     col_names = [x for x in string.ascii_lowercase]
-    col_names += ['{}{}'.format(x,y) for x in string.ascii_lowercase for y in string.ascii_lowercase]
-    col_names += ['{}{}{}'.format(x,y,z) for x in string.ascii_lowercase for y in string.ascii_lowercase for z in string.ascii_lowercase]
-    
-    
-    
+    col_names += ['{}{}'.format(x, y) for x in string.ascii_lowercase for y in string.ascii_lowercase]
+    col_names += ['{}{}{}'.format(x, y, z) for x in string.ascii_lowercase for y in string.ascii_lowercase for z in string.ascii_lowercase]
+
     if ':' in tot_range:
         trl, trr = tot_range.split(':')
     else:
         trl = trr = tot_range
-        
+
     tr_tr, tr_br, tr_lc, tr_rc = int(re.sub('[a-z]', '', trl)), int(re.sub('[a-z]', '', trr)), re.sub('[0-9]', '', trl), re.sub('[0-9]', '', trr)
-    
+
     if block_range is None:
-        return '{}:{},{}:{}'.format(tr_tr-1, tr_br, col_names.index(tr_lc),col_names.index(tr_rc)+1) 
-        
+        return '{}:{},{}:{}'.format(tr_tr - 1, tr_br, col_names.index(tr_lc), col_names.index(tr_rc) + 1)
+
     if ':' in block_range:
         brl, brr = block_range.split(':')
     else:
         brl = brr = block_range
-    
+
     br_tr, br_br, br_lc, br_rc = int(re.sub('[a-z]', '', brl)), int(re.sub('[a-z]', '', brr)), re.sub('[0-9]', '', brl), re.sub('[0-9]', '', brr)
-    
-    col_slice = '{}:{}'.format(col_names.index(br_lc)-col_names.index(tr_lc), col_names.index(br_rc)-col_names.index(tr_lc)+1)
-    row_slice = '{}:{}'.format(br_tr-tr_tr, br_br-tr_tr+1)
-    return '{},{}'.format(row_slice, col_slice) 
+
+    col_slice = '{}:{}'.format(col_names.index(br_lc) - col_names.index(tr_lc), col_names.index(br_rc) - col_names.index(tr_lc) + 1)
+    row_slice = '{}:{}'.format(br_tr - tr_tr, br_br - tr_tr + 1)
+    return '{},{}'.format(row_slice, col_slice)
+
 
 def get_excel_range_dimension(r):
     col_names = [x for x in string.ascii_lowercase]
-    col_names += ['{}{}'.format(x,y) for x in string.ascii_lowercase for y in string.ascii_lowercase]
-    col_names += ['{}{}{}'.format(x,y,z) for x in string.ascii_lowercase for y in string.ascii_lowercase for z in string.ascii_lowercase]
-    
+    col_names += ['{}{}'.format(x, y) for x in string.ascii_lowercase for y in string.ascii_lowercase]
+    col_names += ['{}{}{}'.format(x, y, z) for x in string.ascii_lowercase for y in string.ascii_lowercase for z in string.ascii_lowercase]
+
     if ':' in r:
         rl, rr = r.split(':')
     else:
-        return (1,1)
+        return (1, 1)
     lrow = int(re.sub('[a-z]', '', rl))
     rrow = int(re.sub('[a-z]', '', rr))
     lcol = col_names.index(re.sub('[0-9]', '', rl))
     rcol = col_names.index(re.sub('[0-9]', '', rr))
-    
-    return (rrow-lrow+1, rcol-lcol+1)
+
+    return (rrow - lrow + 1, rcol - lcol + 1)
+
 
 def get_sheet_names(fpath, file_type='xlsx'):
     res = []
@@ -84,9 +86,8 @@ def get_sheet_names(fpath, file_type='xlsx'):
         book.release_resources()
     return sheet_names
 
+
 def get_sheet_tarr(fpath, sname, file_type='xlsx', max_cols=100, max_rows=10000):
-    res = []
-    
     if file_type == 'xlsx':
         book = openpyxl.load_workbook(fpath, read_only=False, data_only=True)
         sheet = book[sname]
@@ -95,10 +96,10 @@ def get_sheet_tarr(fpath, sname, file_type='xlsx', max_cols=100, max_rows=10000)
             orig_n, orig_m = 0, 0
         else:
             n, m = sheet.max_row, sheet.max_column
-            orig_n, orig_m = n,m
+            orig_n, orig_m = n, m
             n = min(n, max_rows)
             m = min(m, max_cols)
-            sheet_array = np.empty([n,m], dtype=object)
+            sheet_array = np.empty([n, m], dtype=object)
             for ri, row in enumerate(sheet.values):
                 if ri >= n:
                     break
@@ -108,31 +109,32 @@ def get_sheet_tarr(fpath, sname, file_type='xlsx', max_cols=100, max_rows=10000)
         book = xlrd.open_workbook(fpath)
         sheet = book.sheet_by_name(sname)
         n, m = sheet.nrows, sheet.ncols
-        orig_n, orig_m = n,m
+        orig_n, orig_m = n, m
         n = min(n, max_rows)
         m = min(m, max_cols)
-        sheet_array = np.empty([n,m], dtype=object)
+        sheet_array = np.empty([n, m], dtype=object)
         for ri in range(n):
             rvals = sheet.row_values(ri)
             sheet_array[ri] = rvals[:m]
         book.release_resources()
-            
+
     if sheet_array.shape[0] > 0 and sheet_array.shape[1] > 0:
         vf = np.vectorize(lambda x: str(x).strip())
         sheet_array = vf(sheet_array)
-        while m > 0 and all([x == '' for x in sheet_array[:,m-1]]):
+        while m > 0 and all([x == '' for x in sheet_array[:, m - 1]]):
             m -= 1
-        while n > 0 and all([x == '' for x in sheet_array[n-1, :]]):
+        while n > 0 and all([x == '' for x in sheet_array[n - 1, :]]):
             n -= 1
         sheet_array = sheet_array[:n, :m]
     else:
         sheet_array = np.array([[]]).astype(str)
-    
+
     return sheet_array, orig_n, orig_m
+
 
 def get_sheet_cell(fpath, sname, cind, rind, file_type='xlsx'):
     res = []
-    
+
     if file_type == 'xlsx':
         book = openpyxl.load_workbook(fpath, read_only=False, data_only=True)
         sheet = book[sname]
@@ -145,6 +147,7 @@ def get_sheet_cell(fpath, sname, cind, rind, file_type='xlsx'):
         book.release_resources()
     return c
 
+
 def get_book(fname, data_only=False, file_type='xlsx'):
     try:
         if file_type == 'xlsx':
@@ -156,6 +159,7 @@ def get_book(fname, data_only=False, file_type='xlsx'):
         raise e
     return book
 
+
 def get_feature_array(fname, sname, reduced=False, file_type='xlsx'):
     get_fnames = get_feature_names_reduced if reduced else get_feature_names
     book = get_book(fname, data_only=False, file_type=file_type)
@@ -164,9 +168,9 @@ def get_feature_array(fname, sname, reduced=False, file_type='xlsx'):
         sheet = book[sname]
         sheet_data = book_data[sname]
         merged_dict, dependents_dict = get_merged_dict_xlsx(sheet)
-        N,M = sheet.max_row, sheet.max_column
+        N, M = sheet.max_row, sheet.max_column
         d = len(get_fnames())
-        my_cell_features = np.empty([N,M,d], dtype=object)
+        my_cell_features = np.empty([N, M, d], dtype=object)
         for rind, (r_data, r_raw) in enumerate(zip(sheet_data.iter_rows(), sheet.iter_rows())):
             for cind, (c, c_raw) in enumerate(zip(r_data, r_raw)):
                 coord = c.coordinate
@@ -195,7 +199,7 @@ def get_feature_array(fname, sname, reduced=False, file_type='xlsx'):
         N, M = sheet.nrows, sheet.ncols
         d = len(get_fnames())
         my_cell_features = np.empty([N, M, d], dtype=object)
-        my_cell_features[:,:,:] = None
+        my_cell_features[:, :, :] = None
         for rind in range(0, sheet.nrows):
             for cind in range(0, sheet.ncols):
                 coord = '{}{}'.format(col_names[cind], rind + 1).upper()
@@ -219,6 +223,7 @@ def get_feature_array(fname, sname, reduced=False, file_type='xlsx'):
     res = np.array(my_cell_features)
     vfunc = np.vectorize(lambda x: 1 if x == 't' else 0 if x == 'f' else x, otypes='f')
     return vfunc(res)
+
 
 def get_sheet_annotations(sheet_name, ann_df, n, m):
     annotations = np.empty([n, m], dtype=object)
@@ -367,6 +372,7 @@ def get_merged_dict_xlsx(sheet):
             dependents_dict[x] = left
     return merged_dict, dependents_dict
 
+
 def get_merged_dict_xls(sheet):
     merged_cells = list(sheet.merged_cells)
     merged_dict = dict()
@@ -379,8 +385,8 @@ def get_merged_dict_xls(sheet):
         left = '{}{}'.format(col_names[lj], li + 1).upper()
         right = (ui, uj)
 
-        dependents = set(['{}{}'.format(col_names[j], i + 1).upper() for i in range(li, ui+1)
-                                for j in range(lj,uj+1) if i!=ui or j!=uj])
+        dependents = set(['{}{}'.format(col_names[j], i + 1).upper() for i in range(li, ui + 1)
+                          for j in range(lj, uj + 1) if i != ui or j != uj])
 
         merged_dict[left] = dict(num=(uj - lj + 1) * (ui - li + 1),
                                  key=k,
@@ -388,8 +394,9 @@ def get_merged_dict_xls(sheet):
                                  right=right,
                                  dependents=dependents)
         for x in dependents:
-            dependents_dict[x] = (li,lj)
+            dependents_dict[x] = (li, lj)
     return merged_dict, dependents_dict
+
 
 def get_feature_names_reduced():
     return ['all_upper', 'capitalized',
@@ -404,21 +411,23 @@ def get_feature_names_reduced():
             'special_chars', 'words',
             'words_like_table', 'words_like_total']
 
+
 def get_feature_names():
     return ['all_upper', 'border_bottom_type=0', 'border_left_type=0',
-       'border_right_type=0', 'border_right_type=2', 'border_top_type=0',
-       'border_top_type=1', 'capitalized', 'cell_borders=0',
-       'cell_type=0', 'cell_type=2', 'contains_colon',
-       'fill_patern=0', 'first_char_num',
-       'first_char_special', 'first_col_num', 'first_row_num', 'font_height',
-       'h_alignment=0', 'h_alignment=2', 'in_year_range',
-       'indentation', 'is_aggr_formula=1', 'is_alpha', 'is_bold',
-       'is_font_color_default', 'is_wraptext', 'leading_spaces', 'length',
-       'num_of_cells', 'num_of_neighbors=0', 'num_of_neighbors=1',
-       'num_of_neighbors=2', 'num_of_neighbors=3', 'num_of_neighbors=4',
-       'punctuations', 'ref_val_type=0',
-       'special_chars', 'underline_type=0', 'v_alignment=2', 'words',
-       'words_like_table', 'words_like_total']
+            'border_right_type=0', 'border_right_type=2', 'border_top_type=0',
+            'border_top_type=1', 'capitalized', 'cell_borders=0',
+            'cell_type=0', 'cell_type=2', 'contains_colon',
+            'fill_patern=0', 'first_char_num',
+            'first_char_special', 'first_col_num', 'first_row_num', 'font_height',
+            'h_alignment=0', 'h_alignment=2', 'in_year_range',
+            'indentation', 'is_aggr_formula=1', 'is_alpha', 'is_bold',
+            'is_font_color_default', 'is_wraptext', 'leading_spaces', 'length',
+            'num_of_cells', 'num_of_neighbors=0', 'num_of_neighbors=1',
+            'num_of_neighbors=2', 'num_of_neighbors=3', 'num_of_neighbors=4',
+            'punctuations', 'ref_val_type=0',
+            'special_chars', 'underline_type=0', 'v_alignment=2', 'words',
+            'words_like_table', 'words_like_total']
+
 
 def get_cell_features_xlsx(c, c_raw, sheet, merged_dict):
     cell_properties = dict()
@@ -513,6 +522,7 @@ def get_cell_features_xlsx(c, c_raw, sheet, merged_dict):
     cell_properties['underline_type'] = c.font.u
 
     return cell_properties
+
 
 def get_cell_features_xls(rind, cind, c, c_raw, sheet, book, merged_dict):
     cell_properties = dict()
@@ -626,5 +636,3 @@ def get_cell_features_xls(rind, cind, c, c_raw, sheet, book, merged_dict):
     cell_properties['underline_type'] = book.font_list[xf.font_index].underline_type
 
     return cell_properties
-
-    

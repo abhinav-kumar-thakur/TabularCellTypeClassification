@@ -44,7 +44,7 @@ def predict_labels(t, cl_model, ce_model, fe_model, senc, mode='ce+f', device='c
         pred_labels = np.argmax(pred, axis=-1)
         pred_probs = np.max(pred, axis=-1)
 
-    return pred_labels, pred_probs
+    return pred_labels, pred_probs, features
 
 
 def generate_cell_embeddings(t, cl_model, ce_model, fe_model, senc, mode='ce+f', device='cpu'):
