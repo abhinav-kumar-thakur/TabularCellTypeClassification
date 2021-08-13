@@ -1,6 +1,6 @@
 import argparse
-import json
 
+import numpy
 import torch
 
 from src.excel_toolkit import get_sheet_tarr, get_feature_array
@@ -34,8 +34,9 @@ def main(filename, sheet_name, ce_model_path, fe_model_path, cl_model_path, w2v_
     print('loading word vectors...')
     senc = SentEnc(infersent_model, w2v_path, vocab_size, device=device, hp=False)
 
-    tarr, n, m = get_sheet_tarr(filename, sheet_name, file_type='xls')
-    ftarr = get_feature_array(filename, sheet_name, file_type='xls')
+    tarr, n, m = get_sheet_tarr(filename, sheet_name, file_type='xlsx')
+    # print(tarr)
+    ftarr = get_feature_array(filename, sheet_name, file_type='xlsx')
     table = dict(table_array=tarr, feature_array=ftarr)
 
     sentences = set()
@@ -44,7 +45,13 @@ def main(filename, sheet_name, ce_model_path, fe_model_path, cl_model_path, w2v_
             sentences.add(c)
     senc.cache_sentences(list(sentences))
 
-    return generate_cell_embeddings(table, cl_model, ce_model, fe_model, senc, mode, device)
+    # tarr_reshape = tarr.reshape(shape[0] * shape[1])
+    # tarr_reshape[tarr_reshape == ''] = 'empty_string'
+    # numpy.savetxt('metadata.tsv', tarr_reshape, delimiter='\t', fmt='%s')
+
+    embeddings = generate_cell_embeddings(table, cl_model, ce_model, fe_model, senc, mode, device)
+    print(embeddings.shape)
+    return embeddings
 
 
 if __name__ == '__main__':
@@ -62,5 +69,5 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     res = main(args.file, args.sheet, args.ce_model, args.fe_model, args.cl_model, args.w2v, args.vocab_size, args.infersent_model)
-    print(res.shape)
-    print(res)
+    # print(res.shape)
+    # print(res)

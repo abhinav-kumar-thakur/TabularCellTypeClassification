@@ -9,10 +9,10 @@ class TableCellModel_SG(nn.Module):
         super(TableCellModel_SG, self).__init__()
         self.vdim = vdim
         
-        self.encoder = nn.Sequential(nn.Dropout(p=0.3), 
+        self.encoder = nn.Sequential(nn.Dropout(p=0),
                                     nn.Linear(vdim, encdim),
                                     # nn.BatchNorm1d(vdim),
-                                    nn.Dropout(p=0.3))
+                                    nn.Dropout(p=0))
 
         self.decoder = nn.Sequential(nn.Linear(encdim, vdim),
                                      nn.Linear(vdim, vdim))
@@ -31,10 +31,10 @@ class TableCellModel_CBOW(nn.Module):
     def __init__(self, vdim, encdim, num_context, hp):
         super(TableCellModel_CBOW, self).__init__()
         self.vdim = vdim
-        self.encoder = nn.Sequential(nn.Dropout(p=0.3), 
+        self.encoder = nn.Sequential(nn.Dropout(p=0),
                                     nn.Linear(vdim*num_context, encdim),
                                     # nn.BatchNorm1d(vdim*num_context),
-                                    nn.Dropout(p=0.3))
+                                    nn.Dropout(p=0))
         
         self.decoder = nn.Sequential(nn.Linear(encdim, vdim),
                                      nn.Linear(vdim, vdim))
@@ -77,11 +77,11 @@ class FeatEnc(nn.Module):
         self.fdim = fdim
         self.encoder = nn.Sequential(nn.Linear(fdim, encdim),
                                      nn.ReLU(),
-                                     nn.Dropout(0.1),
+                                     nn.Dropout(0.0),
                                      nn.Linear(encdim, encdim))
         self.decoder = nn.Sequential(nn.Linear(encdim, fdim),
                                      nn.ReLU(),
-                                     nn.Dropout(0.1),
+                                     nn.Dropout(0.),
                                      nn.Linear(fdim, fdim))
     def forward(self, input_vecs):
         ench = self.encoder(input_vecs)
