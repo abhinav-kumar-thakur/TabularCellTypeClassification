@@ -36,15 +36,14 @@ class CellEmbeddingModelWrapper:
         print('loading word vectors...')
         self.senc = SentEnc(infersent_model, w2v_path, vocab_size, device=self.device, hp=False)
 
-    def predict_labels(self, fname):
+    def predict_labels(self, filename, sheet_names=None):
         result = dict()
-        snames = get_sheet_names(fname, file_type='xlsx')
-        # snames = get_sheet_names(fname, file_type='xlsx')
+        filetype = 'xlsx' if 'xlsx' in filename else 'xls'
+        snames = sheet_names if sheet_names else get_sheet_names(filename, file_type=filetype)
         for sname in snames:
-            # tarr, n, m = get_sheet_tarr(fname, sname, file_type='xls')
-            # ftarr = get_feature_array(fname, sname, file_type='xls')
-            tarr, n, m = get_sheet_tarr(fname, sname, file_type='xlsx')
-            ftarr = get_feature_array(fname, sname, file_type='xlsx')
+            print(f"Generating embedding for {filename} and {sname}")
+            tarr, n, m = get_sheet_tarr(filename, sname, file_type=filetype)
+            ftarr = get_feature_array(filename, sname, file_type=filetype)
 
             table = dict(table_array=tarr, feature_array=ftarr)
 
@@ -57,7 +56,7 @@ class CellEmbeddingModelWrapper:
             labels, probs, features = predict_labels(table, self.cl_model, self.ce_model, self.fe_model, self.senc, self.mode, self.device)
             probs = np.exp(probs)
             labels = np.vectorize(lambda x: label2ind[x])(labels)
-            result[sname] = dict(text=tarr.tolist(), labels=labels.tolist(), labels_probs=probs.tolist(), embeddings=features.tolist())
+            result[sname] = dict(table_arrays=tarr.tolist(), labels=labels.tolist(), labels_probs=probs.tolist(), embeddings=features)
         return result
 
 

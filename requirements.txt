@@ -11,3 +11,4 @@ torchvision
 tqdm
 xlrd
 nltk
+matplotlib

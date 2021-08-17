@@ -81,7 +81,7 @@ class FeatEnc(nn.Module):
                                      nn.Linear(encdim, encdim))
         self.decoder = nn.Sequential(nn.Linear(encdim, fdim),
                                      nn.ReLU(),
-                                     nn.Dropout(0.),
+                                     nn.Dropout(0.0),
                                      nn.Linear(fdim, fdim))
     def forward(self, input_vecs):
         ench = self.encoder(input_vecs)
