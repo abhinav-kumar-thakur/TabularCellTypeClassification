@@ -1,0 +1,186 @@
+[
+  {
+    "id": "block_1",
+    "link": "block_2",
+    "links": {},
+    "role": "mainSubject",
+    "selection": {
+      "x1": 1,
+      "x2": 1,
+      "y1": 1,
+      "y2": 1
+    }
+  },
+  {
+    "id": "block_2",
+    "link": "",
+    "links": {
+      "mainSubject": "block_1"
+    },
+    "property": {
+      "data_type": "quantity",
+      "description": "Fraction of voters in favor of candidate",
+      "id": "Ppolls-polling fraction",
+      "label": "polling fraction"
+    },
+    "role": "dependentVar",
+    "selection": {
+      "x1": 4,
+      "x2": 5,
+      "y1": 10,
+      "y2": 18
+    },
+    "type": "quantity"
+  },
+  {
+    "id": "block_3",
+    "link": "",
+    "links": {},
+    "property": {
+      "data_type": "WikibaseItem",
+      "description": "qualifier stating that a statement applies within the scope of a particular item",
+      "id": "P642",
+      "label": "of"
+    },
+    "role": "qualifier",
+    "selection": {
+      "x1": 4,
+      "x2": 5,
+      "y1": 9,
+      "y2": 9
+    },
+    "type": "wikibaseitem"
+  },
+  {
+    "id": "block_4",
+    "link": "",
+    "links": {},
+    "property": {
+      "data_type": "time",
+      "description": "time and date something took place, existed or a statement was true",
+      "id": "P585",
+      "label": "point in time"
+    },
+    "role": "qualifier",
+    "selection": {
+      "x1": 2,
+      "x2": 2,
+      "y1": 10,
+      "y2": 18
+    },
+    "type": "time"
+  },
+  {
+    "id": "block_5",
+    "link": "",
+    "links": {},
+    "property": {
+      "data_type": "quantity",
+      "description": "The size of a sample in an experiment",
+      "id": "Ppolls-sample size",
+      "label": "sample size"
+    },
+    "role": "qualifier",
+    "selection": {
+      "x1": 3,
+      "x2": 3,
+      "y1": 10,
+      "y2": 18
+    },
+    "type": "quantity"
+  },
+  {
+    "id": "block_6",
+    "link": "",
+    "links": {},
+    "property": {
+      "data_type": "wikibaseitem",
+      "description": "",
+      "id": "Ppolls-polling agency",
+      "label": "polling agency"
+    },
+    "role": "qualifier",
+    "selection": {
+      "x1": 1,
+      "x2": 1,
+      "y1": 10,
+      "y2": 18
+    },
+    "type": "wikibaseitem"
+  },
+  {
+    "id": "block_7",
+    "link": "",
+    "links": {},
+    "property": {
+      "data_type": "quantity",
+      "description": "",
+      "id": "Ppolls-margin of error",
+      "label": "margin of error"
+    },
+    "role": "qualifier",
+    "selection": {
+      "x1": 8,
+      "x2": 8,
+      "y1": 10,
+      "y2": 18
+    },
+    "type": "quantity"
+  },
+  {
+    "id": "block_8",
+    "link": "",
+    "links": {},
+    "property": {
+      "data_type": "WikibaseItem",
+      "description": "to be used in the references field to refer to the information document or database in which a claim is made; for qualifiers use P805",
+      "id": "P248",
+      "label": "stated in",
+      "url": "https://www.wikidata.org/wiki/Property:P248"
+    },
+    "role": "qualifier",
+    "selection": {
+      "x1": 1,
+      "x2": 1,
+      "y1": 3,
+      "y2": 3
+    },
+    "type": "string"
+  },
+  {
+    "id": "block_9",
+    "link": "",
+    "links": {},
+    "property": {
+      "description": "organization or person responsible for publishing books, periodicals, printed music, podcasts, games or software",
+      "id": "P123",
+      "label": "publisher"
+    },
+    "role": "qualifier",
+    "selection": {
+      "x1": 9,
+      "x2": 9,
+      "y1": 10,
+      "y2": 18
+    },
+    "type": "wikibaseitem"
+  },
+  {
+    "id": "block_10",
+    "link": "",
+    "links": {},
+    "property": {
+      "description": "object of which the subject is a part (if this subject is already part of object A which is a part of object B, then please only make the subject part of object A). Inverse property of \\has part\\ (P527, see also \\has parts of the class\\ (P2670)).",
+      "id": "P361",
+      "label": "part of"
+    },
+    "role": "qualifier",
+    "selection": {
+      "x1": 1,
+      "x2": 1,
+      "y1": 4,
+      "y2": 4
+    },
+    "type": "wikibaseitem"
+  }
+]
